@@ -1,0 +1,7 @@
+Für die Datenbank wird folgender User innerhalb der Datenbank benötigt.
+
+USERNAME: admin
+PASSWORD: root
+
+Anbindung ist in Database.php
+Beispiel in Beispiel.php
