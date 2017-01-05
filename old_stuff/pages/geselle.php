@@ -3,7 +3,7 @@
 
  	<div id="content" class="clearfix">
  	
- 		<h2>Die Gesellenausbildung</h2>
+ 		<h2>Die Gesellenausbildung 2.0</h2>
  	
  		
  	
