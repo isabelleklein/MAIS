@@ -2,111 +2,123 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>XXXXXXX<br />
-											yyyyyyy</h1>
-											<p>Entscheidungsvorlage</p>
+											<h1>Kampangen</h1>
+											<a href="javascript:AnzeigeUmschalten('new_Kampange');" class="button special">neue Kampange</a>
 										</header>
-										<p>Text unterhalb des Headers
-											</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
 									</div>
-									<span class="image object">
-										<img src="images/pic10.jpg" alt="" />
-									</span>
+									
 								</section>
+								
+								<section id="new_Kampange" style="display:none;">
+									
+									<form action="index.php?page=400" method="post">
+										<table>
+											<tr>
+												<td>Kampangenname</td>
+												<td><input type="text" name="Kampangenname"></td>
+											</tr>
+											<tr>
+												<td>Kampangenart</td>
+												<td><input type="text" name="Kampangenart"></td>
+											</tr>
+											<tr>
+												<td>Kampangenbeginn</td>
+												<td><input type="text" name="Beginn"></td>
+											</tr>
+											<tr>
+												<td>Kampangenende</td>
+												<td><input type="text" name="Ende"></td>
+											</tr>
+											<tr>
+												<td>Kampangenerfasser</td>
+												<td><input type="text" name="Erfasser"></td>
+											</tr>
+											<tr>
+												<td>KampangenID</td>
+												<td><input type="text" name="ID"></td>
+											</tr>
+											<tr>
+												<td>Kampangenbeschreibung</td>
+												<td><input type="text" name="Kampangenbeschreibung"></td>
+											</tr>											
+										</table>
+										
+										<input type="submit" value="Speichern">
+									</form>
+									
+								</section>
+								
+															
+									<?php
+									if (isset($_POST['Kampangenname'])){
+										$sql = "INSERT INTO Kampange (Kampange_ID, Kampange_Name, Kampange_Beginn, Kampange_Ende, Kampange_Art, Kampange_Erfasser, Kampange_Beschreibung ) VALUES('".$_POST['ID']."','".$_POST['Kampangenname']."','".$_POST['Beginn']."','".$_POST['Ende']."','".$_POST['Kampangenart']."','".$_POST['Erfasser']."','".$_POST['Kampangenbeschreibung']."');";							
+											
+										$result = mysqli_query($db, $sql) 
+          											OR die("'".$sql."':".mysqli_error());		
+									}
+									?>
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Erat lacinia</h2>
-									</header>
-									<div class="features">
-										<article>
-											<span class="icon fa-diamond"></span>
-											<div class="content">
-												<h3>Portitor ullamcorper</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon fa-paper-plane"></span>
-											<div class="content">
-												<h3>Sapien veroeros</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon fa-rocket"></span>
-											<div class="content">
-												<h3>Quam lorem ipsum</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-										<article>
-											<span class="icon fa-signal"></span>
-											<div class="content">
-												<h3>Sed magna finibus</h3>
-												<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											</div>
-										</article>
-									</div>
-								</section>
 
-							<!-- Section -->
+							<!-- Section Ausgabe-Tabelle Kampangen-->
 								<section>
-									<header class="major">
-										<h2>Ipsum sed dolor</h2>
-									</header>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
-											<h3>Interdum aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-											<h3>Nulla amet dolore</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
-											<h3>Tempus ullamcorper</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3>Sed etiam facilis</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3>Feugiat lorem aenean</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>
-											<h3>Amet varius aliquam</h3>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-											<ul class="actions">
-												<li><a href="#" class="button">More</a></li>
-											</ul>
-										</article>
-									</div>
+									<?php
+										
+										$sql = 'SELECT * FROM kampange';
+									
+										$db_erg = mysqli_query($db,$sql);
+										
+										if ( ! $db_erg ){
+  											die('Ungültige Abfrage: ' . mysqli_error($db));
+										}
+										
+										if (is_null($db_erg)){
+										
+											echo "Es wurden keine Kampangen gefunden";
+										
+										}else{
+											
+											?>
+											<table border="1">
+											<thead>
+												<th>Art</th>
+												<th>Beginn</th>
+												<th>Ende</th>
+												<th>Beschreibung</th>
+												<th>Erfasser</th>
+												<th>Name</th>
+												<th></th>
+											</thead>
+											<?php 
+											while ($zeile = mysqli_fetch_array( $db_erg)){	
+	  											echo "<tr>";
+	  											echo "<td>". $zeile['Kampange_Art'] . "</td>";
+	  											echo "<td>". $zeile['Kampange_Beginn'] . "</td>";
+	  											echo "<td>". $zeile['Kampange_Ende'] . "</td>";
+	  											echo "<td>". $zeile['Kampange_Beschreibung'] . "</td>";
+											  	echo "<td>". $zeile['Kampange_Erfasser'] . "</td>";
+											  	echo "<td>". $zeile['Kampange_Name'] . "</td>";
+											  	echo "<td><a href='#' class='button'>Details</a></td>";
+											  	echo "</tr>";
+											}
+											echo "</table>";
+										}
+										mysqli_free_result( $db_erg );
+																		
+									?>
+									
 								</section>
+								
+								<script language="javascript" type="text/javascript" defer="defer">
+								<!--
+								function AnzeigeUmschalten( i )
+								{
+								   if ( document.getElementById(i).style.display == 'none' ) {
+								      document.getElementById(i).style.display = '';
+								   } else {
+								      document.getElementById(i).style.display = 'none';
+								   }
+								}
+								//-->
+								</script>
+
+							
