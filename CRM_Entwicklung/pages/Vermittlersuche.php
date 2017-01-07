@@ -20,7 +20,7 @@
 									?>
 									<!-- Suche nach Vermittler Name -->																		
 									<?php 
-											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t1.Vermittler_ID, t2.Vermittler_ZAD, t3.ZAD_Name, t3.ZAD_PLZ, t3.ZAD_ORT FROM Vermittler_Konto AS t1 INNER JOIN Vermittler AS t2 ON t1.Vermittler_ID = t2.Vermittler_ID INNER JOIN ZAD AS t3 ON t2.Vermittler_ZAD = t3.ZAD_ZAD INNER JOIN konten_hierarchie AS t4 ON t1.UV = t4.Konten_UV  WHERE t3.ZAD_Name LIKE '%".$Suche."%'";
+											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t1.Vermittler_ID, t2.Vermittler_ZAD, t3.ZAD_Name, t3.ZAD_PLZ, t3.ZAD_ORT FROM Vermittler_Konto AS t1 INNER JOIN Vermittler AS t2 ON t1.Vermittler_ID = t2.Vermittler_ID INNER JOIN ZAD AS t3 ON t2.Vermittler_ZAD = t3.ZAD_ZAD INNER JOIN Konten_Hierarchie AS t4 ON t1.UV = t4.Konten_UV  WHERE t3.ZAD_Name LIKE '%".$Suche."%'";
 										
 											$db_erg = mysqli_query($db,$sql);
 											
@@ -61,7 +61,7 @@
 
 									<!-- Suche nach Vermittler ID -->																		
 									<?php 
-											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t1.Vermittler_ID, t2.Vermittler_ZAD, t3.ZAD_Name, t3.ZAD_PLZ, t3.ZAD_ORT FROM Vermittler_Konto AS t1 INNER JOIN Vermittler AS t2 ON t1.Vermittler_ID = t2.Vermittler_ID INNER JOIN ZAD AS t3 ON t2.Vermittler_ZAD = t3.ZAD_ZAD INNER JOIN konten_hierarchie AS t4 ON t1.UV = t4.Konten_UV  WHERE t1.Vermittler_ID LIKE '%".$Suche."%'";
+											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t1.Vermittler_ID, t2.Vermittler_ZAD, t3.ZAD_Name, t3.ZAD_PLZ, t3.ZAD_ORT FROM Vermittler_Konto AS t1 INNER JOIN Vermittler AS t2 ON t1.Vermittler_ID = t2.Vermittler_ID INNER JOIN ZAD AS t3 ON t2.Vermittler_ZAD = t3.ZAD_ZAD INNER JOIN Konten_Hierarchie AS t4 ON t1.UV = t4.Konten_UV  WHERE t1.Vermittler_ID LIKE '%".$Suche."%'";
 										
 											$db_erg = mysqli_query($db,$sql);
 											
@@ -102,7 +102,7 @@
 
 									<!-- Suche nach Konto-Name -->																		
 									<?php 
-											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t3.Vermittler_ID, t1.Konten_ZAD, t2.ZAD_Name, t2.ZAD_PLZ, t2.ZAD_ORT FROM Konten as t1 INNER JOIN ZAD as t2 ON t1.Konten_ZAD = t2.ZAD_ZAD INNER JOIN vermittler_konto as t3 on t1.KONTEN_UV = t3.UV INNER JOIN konten_hierarchie AS t4 ON t1.Konten_UV = t4.Konten_UV WHERE t2.ZAD_Name LIKE '%".$Suche."%'";
+											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t3.Vermittler_ID, t1.Konten_ZAD, t2.ZAD_Name, t2.ZAD_PLZ, t2.ZAD_ORT FROM Konten as t1 INNER JOIN ZAD as t2 ON t1.Konten_ZAD = t2.ZAD_ZAD INNER JOIN Vermittler_Konto as t3 on t1.KONTEN_UV = t3.UV INNER JOIN Konten_Hierarchie AS t4 ON t1.Konten_UV = t4.Konten_UV WHERE t2.ZAD_Name LIKE '%".$Suche."%'";
 										
 											$db_erg = mysqli_query($db,$sql);
 											
@@ -142,7 +142,7 @@
 									?>
 									<!-- Suche nach Konto-Nummer -->																		
 									<?php 
-											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t3.Vermittler_ID, t1.Konten_ZAD, t2.ZAD_Name, t2.ZAD_PLZ, t2.ZAD_ORT FROM Konten as t1 INNER JOIN ZAD as t2 ON t1.Konten_ZAD = t2.ZAD_ZAD INNER JOIN vermittler_konto as t3 on t1.KONTEN_UV = t3.UV INNER JOIN konten_hierarchie AS t4 ON t1.Konten_UV = t4.Konten_UV WHERE t1.Konten_UV LIKE '%".$Suche."%'";
+											$sql = "SELECT DISTINCT t4.Konten_ZN, t4.Konten_GS, t3.Vermittler_ID, t1.Konten_ZAD, t2.ZAD_Name, t2.ZAD_PLZ, t2.ZAD_ORT FROM Konten as t1 INNER JOIN ZAD as t2 ON t1.Konten_ZAD = t2.ZAD_ZAD INNER JOIN Vermittler_Konto as t3 on t1.KONTEN_UV = t3.UV INNER JOIN Konten_Hierarchie AS t4 ON t1.Konten_UV = t4.Konten_UV WHERE t1.Konten_UV LIKE '%".$Suche."%'";
 										
 											$db_erg = mysqli_query($db,$sql);
 											

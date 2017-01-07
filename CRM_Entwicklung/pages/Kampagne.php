@@ -27,7 +27,7 @@
 									if (isset($_POST['Kampangenname'])){
 										echo '<section>';
 																			
-											$sql = "SELECT * FROM kampange WHERE Kampange_Name LIKE '%".$_POST['Kampangenname']."%'";
+											$sql = "SELECT * FROM Kampange WHERE Kampange_Name LIKE '%".$_POST['Kampangenname']."%'";
 										
 											$db_erg = mysqli_query($db,$sql);
 											
@@ -76,7 +76,7 @@
 																
 										echo '<section>';
 																			
-											$sql = 'SELECT * FROM kampange';
+											$sql = 'SELECT * FROM Kampange';
 										
 											$db_erg = mysqli_query($db,$sql);
 											
