@@ -13,14 +13,21 @@
 								
 								
 							<!-- aktueller Vermittler -->
-								<section>
-									<header class="major">
-										<h2>aktueller Vermittler</h2>
-									</header>
-									<p>12345 Max Mustermann <br>
-										68165 Mannheim</p>
+							<?php 
+								if($verm_name != "") {
+									echo "<section>";
+									echo "<header class='major'>";
+										echo "<h2>aktueller Vermittler</h2>";
+									echo "</header>";
+									echo "<p>".$verm_nr. " ".$verm_name."<br>";
+										echo $verm_plz." ".$verm_ort."</p>";
 									
-								</section>
+								echo "</section>";
+								
+								}
+							
+							?>
+								
 
 							<!-- Menu -->
 								<nav id="menu">
