@@ -1,5 +1,4 @@
 
-
 				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
@@ -12,24 +11,34 @@
 								</section>
 								
 								
-							<!-- aktueller Vermittler -->
-							<?php 
-								if($verm_name != "") {
-									echo "<section>";
-									echo "<header class='major'>";
-										echo "<h2>aktueller Vermittler</h2>";
-									echo "</header>";
-									echo "<p>".$verm_nr. " ".$verm_name."<br>";
-										echo $verm_plz." ".$verm_ort."</p>";
-									
-								echo "</section>";
+								<!-- aktueller Vermittler -->
+								<?php 
+									if($_SESSION['Vermittler_ID'] != "") {
+										
+										$sql = "SELECT DISTINCT t1.Vermittler_ID, t2.ZAD_Name, t2.ZAD_PLZ, t2.ZAD_ORT FROM Vermittler AS t1 INNER JOIN ZAD AS t2 ON t1.Vermittler_ZAD = t2.ZAD_ZAD WHERE t1.Vermittler_ID = '".$_SESSION['Vermittler_ID']."'";
+											
+										$db_erg = mysqli_query($db,$sql);
+												
+										if ( ! $db_erg ){
+		  									die('Ungültige Abfrage: ' . mysqli_error($db));
+										}											
+										
+	
+										echo "<section>";
+										echo "<header class='major'>";
+											echo "<h2>aktueller Vermittler</h2>";
+										echo "</header>";
+										while ($zeile = mysqli_fetch_array( $db_erg)){	
+			  								echo "<p>". $zeile['Vermittler_ID'] ." ". $zeile['ZAD_Name'] ."<br>";
+			  								echo $zeile['ZAD_PLZ'] ." ". $zeile['ZAD_ORT'] ."</p>";
+			  							
+			  							}	
+			  							echo "</section>";							
+									}					
+								?>
 								
-								}
-							
-							?>
-								
-
 							<!-- Menu -->
+							<section>
 								<nav id="menu">
 									<header class="major">
 										<h2>Navigation</h2>
@@ -59,7 +68,8 @@
 										<li><a href="?page=400">Kampagne</a></li>
 									</ul>
 								</nav>
-
+							</section>
+						
 							<!-- Section 
 								<section>
 									<header class="major">
@@ -84,7 +94,7 @@
 									</ul>
 								</section>-->
 
-							<!-- Section -->
+								<!-- Section -->
 								<section>
 									<header class="major">
 										<h2>Ansprechpartner</h2>

@@ -2,58 +2,76 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Vermittler-Personen</h1>
+										<h2>Vermittler-Personen</h2>
 									</header>
+								</section>
 
 												<!-- Table -->
-													<h3>Vermittler-&Uuml;bersicht</h3>
+								<h3>Personen-&Uuml;bersicht</h3>
 
-													<h4></h4>
-													<div class="table-wrapper">
-														<table>
-															<thead>
-																<tr>
-																	<th>GS</th>
-																	<th>Vermittler-Nr.</th>
-																	<th>Vermittler</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>010</td>
-																	<td>12345</td>
-																	<td>Max Mustermann, Musterstraße 1, 12345 Musterhausen</td>
-																</tr>
-																<tr>
-																	<td>Item2</td>
-																	<td>Vis ac commodo adipiscing arcu aliquet.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item3</td>
-																	<td> Morbi faucibus arcu accumsan lorem.</td>
-																	<td>29.99</td>
-																</tr>
-																<tr>
-																	<td>Item4</td>
-																	<td>Vitae integer tempus condimentum.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item5</td>
-																	<td>Ante turpis integer aliquet porttitor.</td>
-																	<td>29.99</td>
-																</tr>
-															</tbody>
-															<tfoot>
-																<tr>
-																	<td colspan="2">Anzahl</td>
-																	<td>5</td>
-																</tr>
-															</tfoot>
-														</table>
-													</div>
-													<a href="#" class="button">neue Person hinzuf&Uuml;gen</a>
-
+								<?php 
+									$sql = "SELECT * FROM Personen as t1 WHERE t1.Personen_Vermittler_ID = '".$_SESSION['Vermittler_ID']."'";
+										
+									$db_erg = mysqli_query($db,$sql);
+											
+									if ( ! $db_erg ){
+	  									die('Ungültige Abfrage: ' . mysqli_error($db));
+									}
+											
+									if (mysqli_num_rows($db_erg)>=1){
+										echo "<section>";										
+										echo "<table border='1'>";
+										echo "<thead>";
+										echo "<th>Vorname</th>";
+										echo "<th>Nachname</th>";
+										echo "<th>Geb-Datum</th>";
+										echo "<th>Titel</th>";
+										echo "<th></th>";
+										echo "</thead>";
+												
+										while ($zeile = mysqli_fetch_array( $db_erg)){	
+		  									echo "<tr>";
+		  									echo "<td>". $zeile['Personen_Vorname'] . "</td>";
+		  									echo "<td>". $zeile['Personen_Nachname'] . "</td>";
+		  									echo "<td>". $zeile['Personen_GEB'] . "</td>";
+		  									echo "<td>". $zeile['Personen_Titel'] . "</td>"; ?>
+											<td><a href="javascript:AnzeigeUmschalten('<?php echo $zeile['Personen_ID'] ?>');" class='button special'>Details</a></td>
+											<?php
+											echo "</tr>";
+											
+											echo "<tr id='". $zeile['Personen_ID'] ."' style='display:none;'>";
+												
+											
+											
+		  									echo "<td>". $zeile['Personen_Vorname'] . "</td>";
+		  									echo "<td>". $zeile['Personen_Nachname'] . "</td>";
+		  									echo "<td>". $zeile['Personen_GEB'] . "</td>";
+		  									echo "<td>". $zeile['Personen_Titel'] . "</td>";
+		  									
+											
+											echo "</tr>";	
+											
+											
+										}
+										echo "</table>";
+										echo "</section>";
+												
+									}
+									mysqli_free_result( $db_erg );
+								?>
 													
-								</section>
+								<a href="#" class="button">neue Person hinzuf&Uuml;gen</a>
+								
+								<script language="javascript" type="text/javascript" defer="defer">
+								
+								function AnzeigeUmschalten( i )
+								{
+								   if ( document.getElementById(i).style.display == 'none' ) {
+								      document.getElementById(i).style.display = '';
+								   } else {
+								      document.getElementById(i).style.display = 'none';
+								   }
+								}
+
+								</script>
+

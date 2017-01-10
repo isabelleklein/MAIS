@@ -49,7 +49,7 @@
 		  											echo "<td>". $zeile['ZAD_Name'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_PLZ'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_ORT'] . "</td>";
-												  	echo "<td><a href='#' class='button'>auswählen</a></td>";
+												  	echo "<td><a href='?page=200&ID=". $zeile['Vermittler_ID'] ."'  class='button'>auswählen</a></td>";
 												  	echo "</tr>";
 												}
 												echo "</table>";
@@ -90,7 +90,7 @@
 		  											echo "<td>". $zeile['ZAD_Name'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_PLZ'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_ORT'] . "</td>";
-												  	echo "<td><a href='#' class='button'>auswählen</a></td>";
+												  	echo "<td><a href='?page=200&ID=". $zeile['Vermittler_ID'] ."'  class='button'>auswählen</a></td>";
 												  	echo "</tr>";
 												}
 												echo "</table>";
@@ -131,7 +131,7 @@
 		  											echo "<td>". $zeile['ZAD_Name'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_PLZ'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_ORT'] . "</td>";
-												  	echo "<td><a href='#' class='button'>auswählen</a></td>";
+												  	echo "<td><a href='?page=200&ID=". $zeile['Vermittler_ID'] ."'  class='button'>auswählen</a></td>";
 												  	echo "</tr>";
 												}
 												echo "</table>";
@@ -171,7 +171,7 @@
 		  											echo "<td>". $zeile['ZAD_Name'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_PLZ'] . "</td>";
 		  											echo "<td>". $zeile['ZAD_ORT'] . "</td>";
-												  	echo "<td><a href='#' class='button'>auswählen</a></td>";
+												  	echo "<td><a href='?page=200&ID=". $zeile['Vermittler_ID'] ."'  class='button'>auswählen</a></td>";
 												  	echo "</tr>";
 												}
 												echo "</table>";

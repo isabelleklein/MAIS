@@ -11,8 +11,8 @@
 											<th>Vermittler-Name</th>
 										</thead>
 										<tr>
-											<td><?php echo $verm_nr ?></td>
-											<td><?php echo $verm_name ?></td>
+											<td></td>
+											<td></td>
 										</tr>
 									
 									

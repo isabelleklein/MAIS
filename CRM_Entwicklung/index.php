@@ -3,10 +3,12 @@
 	/* $user_id = $_SESSION['user_id']; */
 
 	$page = $_GET['page'];
-	$verm_nr = "12345";
-	$verm_name = "Max Mustermann";
-	$verm_plz = "12345";
-	$verm_ort = "Musterhausen";
+	
+	if (!isset($_SESSION['Vermittler_ID'])){$_SESSION['Vermittler_ID']="";}
+	if(isset($_GET['ID']) and $_GET['ID'] != $_SESSION['Vermittler_ID']) {
+		$_SESSION['Vermittler_ID'] = $_GET['ID'];		
+		
+	}			
 	
 	if($page == null) header("Location: ?page=100");
 	
@@ -14,6 +16,7 @@
 
 	include('header.php');
 	include('dbconnect.php');
+
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
