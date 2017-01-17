@@ -60,7 +60,7 @@
 									mysqli_free_result( $db_erg );
 								?>
 													
-								<a href="#" class="button">neue Person hinzuf&Uuml;gen</a>
+								<a href="?page=250" class="button">neue Person hinzuf&Uuml;gen</a>
 								
 								<script language="javascript" type="text/javascript" defer="defer">
 								
