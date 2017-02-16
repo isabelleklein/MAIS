@@ -6,12 +6,12 @@
 									</header>
 								</section>
 
-												<!-- Table -->
+								<!-- Table -->
 								<h3>Personen-&Uuml;bersicht</h3>
 
 								<?php 
 									$sql = "SELECT * FROM Personen as t1 WHERE t1.Personen_Vermittler_ID = '".$_SESSION['Vermittler_ID']."'";
-										
+									$_SESSION['Personen_ID']="";	
 									$db_erg = mysqli_query($db,$sql);
 											
 									if ( ! $db_erg ){
@@ -34,44 +34,36 @@
 		  									echo "<td>". $zeile['Personen_Vorname'] . "</td>";
 		  									echo "<td>". $zeile['Personen_Nachname'] . "</td>";
 		  									echo "<td>". $zeile['Personen_GEB'] . "</td>";
-		  									echo "<td>". $zeile['Personen_Titel'] . "</td>"; ?>
-											<td><a href="javascript:AnzeigeUmschalten('<?php echo $zeile['Personen_ID'] ?>');" class='button special'>Details</a></td>
-											<?php
-											echo "</tr>";
-											
-											echo "<tr id='". $zeile['Personen_ID'] ."' style='display:none;'>";
-												
-											
-											
-		  									echo "<td>". $zeile['Personen_Vorname'] . "</td>";
-		  									echo "<td>". $zeile['Personen_Nachname'] . "</td>";
-		  									echo "<td>". $zeile['Personen_GEB'] . "</td>";
 		  									echo "<td>". $zeile['Personen_Titel'] . "</td>";
 		  									
-											
-											echo "</tr>";	
-											
-											
+											echo "<td><input type='button' name='details' id='details' value='Details' onclick='document.write('".person_detail($zeile['Personen_ID'])."')'></td>";
+											echo "</tr>";
 										}
 										echo "</table>";
 										echo "</section>";
 												
 									}
+								
 									mysqli_free_result( $db_erg );
+									
 								?>
-													
-								<a href="?page=250" class="button">neue Person hinzuf&Uuml;gen</a>
 								
-								<script language="javascript" type="text/javascript" defer="defer">
+								<input type="button" name="neu" id="neu" value="neue Person hinzuf&Uuml;gen" onclick="document.write('<?php neue_person() ?>')">
+
+<?php
+
+	function neue_person()
+	{
+		$_SESSION['Personen_ID']="";
+		
+	}
+	
+	function person_detail($personen_id)
+	{
+		$_SESSION['Personen_ID']=$personen_id;
+	}
+
+
+?>
+			
 								
-								function AnzeigeUmschalten( i )
-								{
-								   if ( document.getElementById(i).style.display == 'none' ) {
-								      document.getElementById(i).style.display = '';
-								   } else {
-								      document.getElementById(i).style.display = 'none';
-								   }
-								}
-
-								</script>
-

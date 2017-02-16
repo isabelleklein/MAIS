@@ -1,5 +1,5 @@
 <?php
-	function vermittlersuche($Suche){
+	public function vermittlersuche($Suche){
 	
 
 		/* Suche nach Vermittler-ID */
@@ -13,6 +13,12 @@
 	
 	}
 	
+	public function id_berechnen(){
+	
+		$dsid = date("YmdHis").$user_id.rand(10000000,99999999);
+	
+		return $dsid
+	}
 	
 
 ?>

@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	/* $user_id = $_SESSION['user_id']; */
-
+	$user_id = "HEDDERSO";
 	$page = $_GET['page'];
 	
 	if (!isset($_SESSION['Vermittler_ID'])){$_SESSION['Vermittler_ID']="";}
