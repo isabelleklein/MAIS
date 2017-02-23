@@ -4,6 +4,8 @@
 	$user_id = "HEDDERSO";
 	$page = $_GET['page'];
 	
+	$_SESSION['Personen_ID']="";
+	
 	if (!isset($_SESSION['Vermittler_ID'])){$_SESSION['Vermittler_ID']="";}
 	if(isset($_GET['ID']) and $_GET['ID'] != $_SESSION['Vermittler_ID']) {
 		$_SESSION['Vermittler_ID'] = $_GET['ID'];		

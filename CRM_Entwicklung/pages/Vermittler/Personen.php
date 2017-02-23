@@ -36,7 +36,7 @@
 		  									echo "<td>". $zeile['Personen_GEB'] . "</td>";
 		  									echo "<td>". $zeile['Personen_Titel'] . "</td>";
 		  									
-											echo "<td><input type='button' name='details' id='details' value='Details' onclick='document.write('".person_detail($zeile['Personen_ID'])."')'></td>";
+											echo "<td><a href='?page=250' class='button' onclick='document.write('".person_detail($zeile['Personen_ID'])."')' >Details</a></td>";
 											echo "</tr>";
 										}
 										echo "</table>";
@@ -47,14 +47,27 @@
 									mysqli_free_result( $db_erg );
 									
 								?>
-								
-								<input type="button" name="neu" id="neu" value="neue Person hinzuf&Uuml;gen" onclick="document.write('<?php neue_person() ?>')">
+						
+								<!-- <a href="?page=250" class="button" onclick="document.open('<?php neue_person() ?>')" >neue Person hinzuf&Uuml;gen</a>
+								-->
+								<a href="?page=250" class="button" onclick="javascript:new_person()" >neue Person hinzuf&Uuml;gen</a>
+			
 
+<script type="text/javascript">
+	function new_person(){
+		<?php
+			$_SESSION['Personen_ID']="123456";
+
+		?>
+	}
+
+
+</script>
 <?php
 
 	function neue_person()
 	{
-		$_SESSION['Personen_ID']="";
+		$_SESSION['Personen_ID']="123456";
 		
 	}
 	

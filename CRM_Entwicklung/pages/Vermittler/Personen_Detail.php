@@ -1,5 +1,5 @@
 <?php
-			echo $_SESSION['Personen_ID']."test";
+			
 			if($_SESSION['Personen_ID']=""){
 				echo id_berechnen();
 				$sql = "INSERT INTO Personen (Personen_ID, Vermittler_ID) VALUES ('".id_berechnen()."','".$_SESSION['Vermittler_ID']."')";
@@ -16,7 +16,7 @@
 	  			die('Ungültige Abfrage: ' . mysqli_error($db));
 			}
 			
-				
+			echo $_SESSION['Personen_ID']." hier sollte die Personen_ID vorne dran stehen";
 			while ($zeile = mysqli_fetch_array( $db_erg)){ 		
 ?>
 <section>
@@ -193,7 +193,7 @@
 			</form>
 		</div>
 	</div>
-	<?php 
-	}
-	?>
 </section>
+<?php 
+	}
+?>
