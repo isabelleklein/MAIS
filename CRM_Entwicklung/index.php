@@ -1,10 +1,8 @@
 <?php 
 	session_start();
 	/* $user_id = $_SESSION['user_id']; */
-	$user_id = "HEDDERSO";
+	$_SESSION['user_id'] = "HEDDERSO";
 	$page = $_GET['page'];
-	
-	$_SESSION['Personen_ID']="";
 	
 	if (!isset($_SESSION['Vermittler_ID'])){$_SESSION['Vermittler_ID']="";}
 	if(isset($_GET['ID']) and $_GET['ID'] != $_SESSION['Vermittler_ID']) {
@@ -22,7 +20,7 @@
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
-	$pagelist = array(000,001,002,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400);
+	$pagelist = array(000,001,002,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400,999);
 	/*if($page != $pagelist) header("Location: ?page=999");*/
 	if (!in_array($page, $pagelist)) {
     	include('pages/error_page.php');;
@@ -48,6 +46,8 @@
 	if($page == 250) include('pages/Vermittler/Personen_Detail.php');
 	if($page == 300) include('pages/Statistiken.php');
 	if($page == 400) include('pages/Kampagne.php');
+	if($page == 999) include('pages/weiterleitung.php');
+
 	
 	
 	
