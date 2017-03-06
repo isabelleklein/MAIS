@@ -20,7 +20,7 @@
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
-	$pagelist = array(000,001,002,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400,999);
+	$pagelist = array(000,001,002,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400,501,550,999);
 	/*if($page != $pagelist) header("Location: ?page=999");*/
 	if (!in_array($page, $pagelist)) {
     	include('pages/error_page.php');;
@@ -46,6 +46,9 @@
 	if($page == 250) include('pages/Vermittler/Personen_Detail.php');
 	if($page == 300) include('pages/Statistiken.php');
 	if($page == 400) include('pages/Kampagne.php');
+	if($page == 500) include('pages/GeVo.php');
+	if($page == 501) include('pages/GeVo_Details.php');
+	if($page == 550) include('pages/GeVo_Aktion.php');
 	if($page == 999) include('pages/weiterleitung.php');
 
 	

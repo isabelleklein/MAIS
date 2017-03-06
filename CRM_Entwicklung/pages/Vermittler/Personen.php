@@ -1,16 +1,3 @@
-<?php
-if(isset($_POST['speichern'])){
-	$sql = "UPDATE `Personen` SET `Personen_Anrede`='2', `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."',	`Personen_GEB`='2000-01-01',	`Personen_EMAIL`='".$_POST['mail']."', `Personen_TEL`='".$_POST['tel']."',	`Personen_MOBIL`='".$_POST['mobil']."', `Personen_DSIG`='y', `Personen_Titel`='Testtitel', `Personen_Rolle`='".$_POST['rolle']."', `Personen_Schwerpunkt`='".$_POST['schwerpunkt']."', `Personen_PRIO`='".$_POST['prio']."', `Personen_Einstellung`='".$_POST['einstellung']."', `Personen_Beziehung`='".$_POST['beziehung']."', `Personen_Kaufmotiv`='".$_POST['kaufmotiv']."', `Personen_Nachtrags_NR`='".$_POST['nachtrag']."', `Personen_Beginn`='2000-01-01', `Personen_Beginn_abw`='2000-01-01', `Personen_Taetigkeitsbeginn`='2000-01-01', `Personen_Vertragsende`='2000-01-01', `Personen_Abgangsgrund`='1', `Personen_Vertragsverhaeltnis`='Vertragsverhältnis', `Personen_BMV_ID`='".$_POST['bmv_id']."', `Personen_BMV_Beginn`='2000-01-01', `Personen_BMV_Austritt`='2000-01-01', `Personen_BMV_Punkte`='".$_POST['bmv_pkt']."', `Personen_KSR_MOD_A`='".$_POST['ksr_mod_a']."', `Personen_KSR_MOD_B`='".$_POST['ksr_mod_b']."', `Personen_Notizen`='".$_POST['notiz']."' WHERE `Personen_ID`='".$_SESSION['Personen_ID']."'";
-	//$sql = "UPDATE `personen` SET `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."' WHERE `Personen_ID`='".$_POST['pers_id']."'";
-	echo $sql;
-	if (mysqli_query($db,$sql)) {
-	} else {
-    	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	}
-}
-
-?>
-
 							<!-- Content -->
 								<section>
 									<header class="main">

@@ -1,4 +1,18 @@
 <?php
+
+if(isset($_POST['speichern'])){
+	$sql = "UPDATE `Personen` SET `Personen_Anrede`='2', `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."',	`Personen_GEB`='2000-01-01',	`Personen_EMAIL`='".$_POST['mail']."', `Personen_TEL`='".$_POST['tel']."',	`Personen_MOBIL`='".$_POST['mobil']."', `Personen_DSIG`='y', `Personen_Titel`='Testtitel', `Personen_Rolle`='".$_POST['rolle']."', `Personen_Schwerpunkt`='".$_POST['schwerpunkt']."', `Personen_PRIO`='".$_POST['prio']."', `Personen_Einstellung`='".$_POST['einstellung']."', `Personen_Beziehung`='".$_POST['beziehung']."', `Personen_Kaufmotiv`='".$_POST['kaufmotiv']."', `Personen_Nachtrags_NR`='".$_POST['nachtrag']."', `Personen_Beginn`='2000-01-01', `Personen_Beginn_abw`='2000-01-01', `Personen_Taetigkeitsbeginn`='2000-01-01', `Personen_Vertragsende`='2000-01-01', `Personen_Abgangsgrund`='1', `Personen_Vertragsverhaeltnis`='Vertragsverhältnis', `Personen_BMV_ID`='".$_POST['bmv_id']."', `Personen_BMV_Beginn`='2000-01-01', `Personen_BMV_Austritt`='2000-01-01', `Personen_BMV_Punkte`='".$_POST['bmv_pkt']."', `Personen_KSR_MOD_A`='".$_POST['ksr_mod_a']."', `Personen_KSR_MOD_B`='".$_POST['ksr_mod_b']."', `Personen_Notizen`='".$_POST['notiz']."' WHERE `Personen_ID`='".$_SESSION['Personen_ID']."'";
+	if (mysqli_query($db,$sql)) {
+	} else {
+    	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+	header("Location: ?page=201");
+}
+if(isset($_POST['back'])){
+	header("Location: ?page=201");
+}
+
+
 			
 			if($_SESSION['Personen_ID']==""){
 				require_once('function.php');	
@@ -29,7 +43,7 @@
 		<!-- class="12u 12u$(medium)" bedeutet ganze Seite-->
 		<div class="12u 12u$(medium)">
 			<!-- Form -->
-			<form action="?page=201" method="post"> 
+			<form action="?page=250" method="post"> 
 				<div class="box">
 					<div class="row uniform">
 						<div class="2u 15u$(small)">
@@ -193,7 +207,7 @@
 				<div class="12u$">
 					<ul class="actions">
 						<li><input class="special" type="submit" value="Speichern" name="speichern" /></li>
-						<li><input type="submit" value="Zur&uuml;ck"/></li>
+						<li><input type="submit" value="Zur&uuml;ck" name="back"/></li>
 					</ul>
 				</div>
 			</form>

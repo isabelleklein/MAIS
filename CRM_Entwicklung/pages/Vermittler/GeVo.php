@@ -1,55 +1,46 @@
-
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>Vermittler-Geschäftsvorfälle</h1>
-									</header>
-
-												<!-- Table -->
-													<h3>Vermittler-&Uuml;bersicht</h3>
-
-													<h4></h4>
-													<div class="table-wrapper">
-														<table>
-															<thead>
-																<tr>
-																	<th>GS</th>
-																	<th>Vermittler-Nr.</th>
-																	<th>Vermittler</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>010</td>
-																	<td>12345</td>
-																	<td>Max Mustermann, Musterstraße 1, 12345 Musterhausen</td>
-																</tr>
-																<tr>
-																	<td>Item2</td>
-																	<td>Vis ac commodo adipiscing arcu aliquet.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item3</td>
-																	<td> Morbi faucibus arcu accumsan lorem.</td>
-																	<td>29.99</td>
-																</tr>
-																<tr>
-																	<td>Item4</td>
-																	<td>Vitae integer tempus condimentum.</td>
-																	<td>19.99</td>
-																</tr>
-																<tr>
-																	<td>Item5</td>
-																	<td>Ante turpis integer aliquet porttitor.</td>
-																	<td>29.99</td>
-																</tr>
-															</tbody>
-															<tfoot>
-																<tr>
-																	<td colspan="2">Anzahl</td>
-																	<td>5</td>
-																</tr>
-															</tfoot>
-														</table>
-								</section>
+<section>
+	<header class="main">
+		<h2>Vermittler-Gesch&auml;ftsvorf&auml;lle</h2>
+	</header>
+</section>
+<?php 
+									$sql = "SELECT t1.* FROM Vermittler as t2 INNER JOIN Vermittler_Konto as t3 ON t2.Vermittler_ID = t3.Vermittler_ID INNER JOIN GeVo_Vorgang as t1 ON t3.UV = t1.GeVo_ASNR WHERE t2.Vermittler_ID = '".$_SESSION['Vermittler_ID']."'";
+									$_SESSION['GeVo_ID']="";	
+									$db_erg = mysqli_query($db,$sql);
+											
+									if ( ! $db_erg ){
+	  									die('Ungültige Abfrage: ' . mysqli_error($db));
+									}
+											
+									if (mysqli_num_rows($db_erg)>=1){
+										echo "<section>";										
+										echo "<table border='1'>";
+										echo "<thead>";
+										echo "<th>Feld1</th>";
+										echo "<th>Feld2</th>";
+										echo "<th>Feld3</th>";
+										echo "<th>Feld4</th>";
+										echo "<th></th>";
+										echo "</thead>";
+												
+										while ($zeile = mysqli_fetch_array( $db_erg)){	
+		  									echo "<form action='?page=999' method='post'>";
+		  									echo "<tr>";
+		  									echo "<td>". $zeile['GeVo_ASNR'] . "</td>";
+		  									echo "<td>". $zeile['GeVo_ASNR'] . "</td>";
+		  									echo "<td>". $zeile['GeVo_Infofeld'] . "</td>";
+		  									echo "<td>". $zeile['GeVo_Infofeld'] . "</td>";
+		  									echo "<td><input type='hidden' name='gevo_id' value='".$zeile['GeVo_ID']."'></td>";
+		  									echo "<td><input type='submit' name='gevo' value='Details' />";
+											echo "</tr>";
+											echo "</form>";
+										}
+										echo "</table>";
+										echo "</section>";
+												
+									}
+								
+									mysqli_free_result( $db_erg );
+									
+		?>
+								<a class="button" href="?page=501">Neuen Gesch&auml;ftsvorfall hinzuf&Uuml;gen</a> 
