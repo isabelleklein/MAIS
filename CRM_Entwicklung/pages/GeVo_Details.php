@@ -13,9 +13,7 @@ if(isset($_POST['back'])){
 }
 		
 			if($_SESSION['GeVo_ID']==""){
-				require_once('Vermittler\function.php');	
-				$new_id = new new_id();	
-				$_SESSION['GeVo_ID']=$new_id->id_berechnen();
+				$_SESSION['GeVo_ID']=getID();
 				$sql = "INSERT INTO `GeVo_Vorgang` (`GeVo_ID`, `GeVo_ASNR`) VALUES ('".$_SESSION['GeVo_ID']."','12345')";
 				if (mysqli_query($db,$sql)) {
 				} else {

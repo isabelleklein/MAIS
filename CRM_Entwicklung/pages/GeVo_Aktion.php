@@ -11,10 +11,9 @@ if(isset($_POST['speichern'])){
 if(isset($_POST['back'])){
 	header("Location: ?page=501");
 }
+			
 			if($_SESSION['Aktion_ID']==""){
-				require_once('Vermittler\function.php');	
-				$new_id = new new_id();	
-				$_SESSION['Aktion_ID']=$new_id->id_berechnen();
+				$_SESSION['Aktion_ID']=getID();
 				$sql = "INSERT INTO `GeVo_Aktion` (`Aktion_ID`, `Aktion_GeVo_ID`) VALUES ('".$_SESSION['Aktion_ID']."','".$_SESSION['GeVo_ID']."')";
 				if (mysqli_query($db,$sql)) {
 				} else {

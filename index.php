@@ -13,28 +13,25 @@
 	if($page == null) header("Location: ?page=100");
 	
 	//PHP-Seiten die eine Header-FKT einhalten bitte hier includen
-	
-	include('dbconnect.php');
-	include('function_collection.php');
 	if($page == 999) include('pages/weiterleitung.php');
 	
-	
+	include('function_collection.php');
 	include('header.php');
-
+	include('dbconnect.php');
 
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
-	$pagelist = array(001,002,003,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400,501,550,999);
+	$pagelist = array(000,001,002,100,101,200,201,202,203,204,205,206,207,208,209,210,250,300,400,501,550,999);
 	/*if($page != $pagelist) header("Location: ?page=999");*/
 	if (!in_array($page, $pagelist)) {
-    	include('pages/error_page.php');
+    	include('pages/error_page.php');;
 		}
 /*----------Pages-------------*/
 	
-	if($page == 001) include('pages/vorlage.php');
-	if($page == 002) include('pages/vorlage2.php');
-	if($page == 003) include('pages/vorlage3.php');
+	if($page == 000) include('pages/vorlage.php');
+	if($page == 001) include('pages/vorlage2.php');
+	if($page == 002) include('pages/vorlage3.php');
 	if($page == 100) include('pages/dashboard.php');
 	if($page == 101) include('pages/Vermittlersuche.php');
 	if($page == 200) include('pages/Vermittler/Stammdaten.php');
@@ -54,7 +51,6 @@
 	if($page == 500) include('pages/GeVo.php');
 	if($page == 501) include('pages/GeVo_Details.php');
 	if($page == 550) include('pages/GeVo_Aktion.php');
-
 
 	
 	
@@ -76,14 +72,6 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
-			
-			<script type="text/javascript">
-				function showhide(divid) {
-				obj = document.getElementById(divid);
-				obj.style.display = obj.style.display == 'block' ? 'none' : 'block';
-				}
-			</script>
-
 
 	</body>
 </html>

@@ -2,35 +2,31 @@
 
 if(isset($_POST['speichern'])){
 	$sql = "UPDATE `Personen` SET `Personen_Anrede`='2', `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."',	`Personen_GEB`='2000-01-01',	`Personen_EMAIL`='".$_POST['mail']."', `Personen_TEL`='".$_POST['tel']."',	`Personen_MOBIL`='".$_POST['mobil']."', `Personen_DSIG`='y', `Personen_Titel`='Testtitel', `Personen_Rolle`='".$_POST['rolle']."', `Personen_Schwerpunkt`='".$_POST['schwerpunkt']."', `Personen_PRIO`='".$_POST['prio']."', `Personen_Einstellung`='".$_POST['einstellung']."', `Personen_Beziehung`='".$_POST['beziehung']."', `Personen_Kaufmotiv`='".$_POST['kaufmotiv']."', `Personen_Nachtrags_NR`='".$_POST['nachtrag']."', `Personen_Beginn`='2000-01-01', `Personen_Beginn_abw`='2000-01-01', `Personen_Taetigkeitsbeginn`='2000-01-01', `Personen_Vertragsende`='2000-01-01', `Personen_Abgangsgrund`='1', `Personen_Vertragsverhaeltnis`='Vertragsverhältnis', `Personen_BMV_ID`='".$_POST['bmv_id']."', `Personen_BMV_Beginn`='2000-01-01', `Personen_BMV_Austritt`='2000-01-01', `Personen_BMV_Punkte`='".$_POST['bmv_pkt']."', `Personen_KSR_MOD_A`='".$_POST['ksr_mod_a']."', `Personen_KSR_MOD_B`='".$_POST['ksr_mod_b']."', `Personen_Notizen`='".$_POST['notiz']."' WHERE `Personen_ID`='".$_SESSION['Personen_ID']."'";
-	if (mysqli_query($db,$sql)) {
-	} else {
-    	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	}
-	header("Location: ?page=201");
+
+	do_sql_no_return($db, $sql, "250save");
+	openlink("201");
 }
 if(isset($_POST['back'])){
-	header("Location: ?page=201");
+	openlink("201");
 }
 
 
 			
-			if($_SESSION['Personen_ID']==""){
-				require_once('function.php');	
-				$new_id = new new_id();	
-				$_SESSION['Personen_ID']=$new_id->id_berechnen();
-				$sql = "INSERT INTO `personen` (`Personen_ID`, `Personen_Vermittler_ID`) VALUES ('".$_SESSION['Personen_ID']."','".$_SESSION['Vermittler_ID']."')";
-				if (mysqli_query($db,$sql)) {
-				} else {
-    				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-				}			
-			}
+if($_SESSION['Personen_ID']==""){
+	$_SESSION['Personen_ID']=getID();
+	$sql = "INSERT INTO `personen` (`Personen_ID`, `Personen_Vermittler_ID`) VALUES ('".$_SESSION['Personen_ID']."','".$_SESSION['Vermittler_ID']."')";
+	if (mysqli_query($db,$sql)) {
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($db);
+	}			
+}
 			
-			$sql = "SELECT t1.* FROM Personen as t1 WHERE t1.Personen_ID = '".$_SESSION['Personen_ID']."'";
-			$db_erg = mysqli_query($db,$sql);
-			if ( ! $db_erg ){
-	  			die('Ungültige Abfrage: ' . mysqli_error($db));
-			}
-			while ($zeile = mysqli_fetch_array( $db_erg)){ 
+$sql = "SELECT t1.* FROM Personen as t1 WHERE t1.Personen_ID = '".$_SESSION['Personen_ID']."'";
+$db_erg = mysqli_query($db,$sql);
+if ( ! $db_erg ){
+	die('Ungültige Abfrage: ' . mysqli_error($db));
+}
+while ($zeile = mysqli_fetch_array( $db_erg)){ 
 ?>
 
 <section>
@@ -220,9 +216,3 @@ if(isset($_POST['back'])){
 
 
 ?>
-<script type="text/javascript">
-function showhide(divid) {
-obj = document.getElementById(divid);
-obj.style.display = obj.style.display == 'block' ? 'none' : 'block';
-}
-</script>
