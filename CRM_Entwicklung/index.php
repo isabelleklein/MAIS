@@ -8,7 +8,11 @@
 	if(isset($_GET['ID']) and $_GET['ID'] != $_SESSION['Vermittler_ID']) {
 		$_SESSION['Vermittler_ID'] = $_GET['ID'];		
 		
-	}			
+	}	
+	
+	include('pages/weiterleitung.php');
+
+		
 	
 	if($page == null) header("Location: ?page=100");
 	
@@ -16,7 +20,7 @@
 	
 	include('dbconnect.php');
 	include('function_collection.php');
-	if($page == 999) include('pages/weiterleitung.php');
+	//if($page == 999) header("Location: pages/weiterleitung.php");
 	
 	
 	include('header.php');

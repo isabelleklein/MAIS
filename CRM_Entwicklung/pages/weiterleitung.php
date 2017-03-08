@@ -1,5 +1,6 @@
 
 <?php
+
 //Weiterleitung für Personen Details
 if(isset($_POST['pers_id'])){
 	$_SESSION['Personen_ID'] = $_POST['pers_id'];

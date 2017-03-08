@@ -29,7 +29,7 @@
 										echo "</thead>";
 												
 										while ($zeile = mysqli_fetch_array( $db_erg)){	
-		  									echo "<form action='?page=999' method='post'>";
+		  									echo "<form action='?page=100' method='post'>";
 		  									echo "<tr>";
 		  									echo "<td>". $zeile['Personen_Vorname'] . "</td>";
 		  									echo "<td>". $zeile['Personen_Nachname'] . "</td>";
