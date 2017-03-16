@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['speichern'])){
-	$sql = "UPDATE `Personen` SET `Personen_Anrede`='2', `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."',	`Personen_GEB`='2000-01-01',	`Personen_EMAIL`='".$_POST['mail']."', `Personen_TEL`='".$_POST['tel']."',	`Personen_MOBIL`='".$_POST['mobil']."', `Personen_DSIG`='y', `Personen_Titel`='Testtitel', `Personen_Rolle`='".$_POST['rolle']."', `Personen_Schwerpunkt`='".$_POST['schwerpunkt']."', `Personen_PRIO`='".$_POST['prio']."', `Personen_Einstellung`='".$_POST['einstellung']."', `Personen_Beziehung`='".$_POST['beziehung']."', `Personen_Kaufmotiv`='".$_POST['kaufmotiv']."', `Personen_Nachtrags_NR`='".$_POST['nachtrag']."', `Personen_Beginn`='2000-01-01', `Personen_Beginn_abw`='2000-01-01', `Personen_Taetigkeitsbeginn`='2000-01-01', `Personen_Vertragsende`='2000-01-01', `Personen_Abgangsgrund`='1', `Personen_Vertragsverhaeltnis`='Vertragsverhältnis', `Personen_BMV_ID`='".$_POST['bmv_id']."', `Personen_BMV_Beginn`='2000-01-01', `Personen_BMV_Austritt`='2000-01-01', `Personen_BMV_Punkte`='".$_POST['bmv_pkt']."', `Personen_KSR_MOD_A`='".$_POST['ksr_mod_a']."', `Personen_KSR_MOD_B`='".$_POST['ksr_mod_b']."', `Personen_Notizen`='".$_POST['notiz']."' WHERE `Personen_ID`='".$_SESSION['Personen_ID']."'";
+	$sql = "UPDATE `Personen` SET `Personen_Anrede`='".$_POST['anr']."', `Personen_Vorname`='".$_POST['vname']."', `Personen_Nachname`='".$_POST['nname']."',	`Personen_GEB`='".$_POST['geb']."',	`Personen_EMAIL`='".$_POST['mail']."', `Personen_TEL`='".$_POST['tel']."',	`Personen_MOBIL`='".$_POST['mobil']."', `Personen_DSIG`='".$_POST['dsig']."', `Personen_Titel`='".$_POST['titel']."', `Personen_Rolle`='".$_POST['rolle']."', `Personen_Schwerpunkt`='".$_POST['schwerpunkt']."', `Personen_PRIO`='".$_POST['prio']."', `Personen_Einstellung`='".$_POST['einstellung']."', `Personen_Beziehung`='".$_POST['beziehung']."', `Personen_Kaufmotiv`='".$_POST['kaufmotiv']."', `Personen_Nachtrags_NR`='".$_POST['nachtrag']."', `Personen_Beginn`='".$_POST['beginn']."', `Personen_Beginn_abw`='".$_POST['beginn_abw']."', `Personen_Taetigkeitsbeginn`='".$_POST['tbeginn']."', `Personen_Vertragsende`='".$_POST['ende']."', `Personen_Abgangsgrund`='".$_POST['agrund']."', `Personen_Vertragsverhaeltnis`='".$_POST['vertrag']."', `Personen_BMV_ID`='".$_POST['bmv_id']."', `Personen_BMV_Beginn`='".$_POST['bmv_beginn']."', `Personen_BMV_Austritt`='".$_POST['bmv_austritt']."', `Personen_BMV_Punkte`='".$_POST['bmv_pkt']."', `Personen_KSR_MOD_A`='".$_POST['ksr_mod_a']."', `Personen_KSR_MOD_B`='".$_POST['ksr_mod_b']."', `Personen_Notizen`='".$_POST['notiz']."' WHERE `Personen_ID`='".$_SESSION['Personen_ID']."'";
 
 	do_sql_no_return($db, $sql, "250save");
 	openlink("201");
@@ -15,10 +15,7 @@ if(isset($_POST['back'])){
 if($_SESSION['Personen_ID']==""){
 	$_SESSION['Personen_ID']=getID();
 	$sql = "INSERT INTO `personen` (`Personen_ID`, `Personen_Vermittler_ID`) VALUES ('".$_SESSION['Personen_ID']."','".$_SESSION['Vermittler_ID']."')";
-	if (mysqli_query($db,$sql)) {
-	} else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($db);
-	}			
+	do_sql_no_return($db, $sql, "250insert");		
 }
 			
 $sql = "SELECT t1.* FROM Personen as t1 WHERE t1.Personen_ID = '".$_SESSION['Personen_ID']."'";
@@ -46,10 +43,10 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<label for="anr">Anrede</label>
 							<div class="select-wrapper">
 								<select id="anr" name="anr">
-								<option value="0">- Anrede -</option>
-								<option value="1">Herr</option>
-								<option value="2">Frau</option>
-								<option value="3">Firma</option>
+								<option value="0" <?php if ($zeile['Personen_Anrede']=="0"){echo "selected";} ?>>- Anrede -</option>
+								<option value="1" <?php if ($zeile['Personen_Anrede']=="1"){echo "selected";} ?>>Herr</option>
+								<option value="2" <?php if ($zeile['Personen_Anrede']=="2"){echo "selected";} ?>>Frau</option>
+								<option value="3" <?php if ($zeile['Personen_Anrede']=="3"){echo "selected";} ?>>Firma</option>
 								</select> 
 							</div>
 						</div>
@@ -61,22 +58,22 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<label for="vname">Vorname</label>
 							<input id="vname" name="vname" placeholder="Vorname" type="text" value="<?php echo $zeile['Personen_Vorname']?>" />
 						</div>
-						<div class="2u 12u$(small)">
+						<div class="3u 12u$(small)">
 							<label for="geb">Geb-Datum</label>
-							<input id="geb" name="geb" placeholder="02.03.1990" type="date" value="<?php echo $zeile['Personen_GEB']?>" />
+							<input id="geb" name="geb" placeholder="" type="date" value="<?php echo $zeile['Personen_GEB']?>" />
 						</div>
 						<div class="5u 12u$(small)">
 							<label for="mail">E-Mail</label>
 							<input id="mail" name="mail" placeholder="E-Mail" type="email" value="<?php echo $zeile['Personen_EMAIL']?>" />
 						</div>
-						<div class="5u 15u$(small)">
+						<div class="4u 15u$(small)">
 							<label for="titel">Titel</label>
 							<div class="select-wrapper">
-								<select id="titel" name="anr">
-								<option value="0">- Titel -</option>
-								<option value="1">Testtitel1</option>
-								<option value="2">Testtitel2</option>
-								<option value="3">Testtitel3</option>
+								<select id="titel" name="titel">
+								<option value="0" <?php if ($zeile['Personen_Titel']=="0"){echo "selected";} ?>>- Titel -</option>
+								<option value="1" <?php if ($zeile['Personen_Titel']=="1"){echo "selected";} ?>>Testtitel1</option>
+								<option value="2" <?php if ($zeile['Personen_Titel']=="2"){echo "selected";} ?>>Testtitel2</option>
+								<option value="3" <?php if ($zeile['Personen_Titel']=="3"){echo "selected";} ?>>Testtitel3</option>
 								</select> 
 							</div>
 						</div>
@@ -101,11 +98,11 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<label for="dsig">DISG</label>
 							<div class="select-wrapper">
 								<select id="dsig" name="dsig">
-								<option value="0">- DISG -</option>
-								<option value="1">grün</option>
-								<option value="2">rot</option>
-								<option value="3">gelb</option>
-								<option value="4">blau</option>
+								<option value="0" <?php if ($zeile['Personen_DSIG']=="0"){echo "selected";} ?>>- DISG -</option>
+								<option value="g" <?php if ($zeile['Personen_DSIG']=="g"){echo "selected";} ?>>grün</option>
+								<option value="r" <?php if ($zeile['Personen_DSIG']=="r"){echo "selected";} ?>>rot</option>
+								<option value="y" <?php if ($zeile['Personen_DSIG']=="y"){echo "selected";} ?>>gelb</option>
+								<option value="b" <?php if ($zeile['Personen_DSIG']=="b"){echo "selected";} ?>>blau</option>
 								</select> 
 							</div>
 						</div>
@@ -146,39 +143,43 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 						</div>
 						<div class="5u 12u$(small)">
 							<label for="beginn">Beginn</label>
-							<input id="beginn" name="beginn" placeholder="" type="text" value="<?php echo $zeile['Personen_Beginn']?>" />
+							<input id="beginn" name="beginn" placeholder="" type="date" value="<?php echo $zeile['Personen_Beginn']?>" />
 						</div>
 						<div class="5u 12u$(small)">
 							<label for="beginn_abw">Beginn abweichend</label>
-							<input id="beginn_abw" name="beginn_abe" placeholder="" type="text" value="<?php echo $zeile['Personen_Beginn_abw']?>" />
+							<input id="beginn_abw" name="beginn_abw" placeholder="" type="date" value="<?php echo $zeile['Personen_Beginn_abw']?>" />
 						</div>
 						<div class="4u 12u$(small)">
 							<label for="tbeginn">Tätigkeitsbeginn</label>
-							<input id="tbeginn" name="tbeginn" placeholder="" type="text" value="<?php echo $zeile['Personen_Taetigkeitsbeginn']?>" />
+							<input id="tbeginn" name="tbeginn" placeholder="" type="date" value="<?php echo $zeile['Personen_Taetigkeitsbeginn']?>" />
 						</div>
 						<div class="4u 12u$(small)">
 							<label for="ende">Vertragsende</label>
-							<input id="ende" name="ende" placeholder="" type="text" value="<?php echo $zeile['Personen_Vertragsende']?>" />
+							<input id="ende" name="ende" placeholder="" type="date" value="<?php echo $zeile['Personen_Vertragsende']?>" />
 						</div>
 						<div class="4u 12u$(small)">
 							<label for="agrund">Abgangsgrund</label>
 							<div class="select-wrapper">
 								<select id="agrund" name="agrund">
-								<option value="0">- Abgangsgrund -</option>
-								<option value="1">Kündigung Agentur</option>
-								<option value="2">Kündigung FDL</option>
-								<option value="3">Alter / Krankheit</option>
-								<option value="4">sonstiges</option>
+								<option value="0" <?php if ($zeile['Personen_Abgangsgrund']=="0"){echo "selected";} ?>>- Abgangsgrund -</option>
+								<option value="1" <?php if ($zeile['Personen_Abgangsgrund']=="1"){echo "selected";} ?>>Kündigung Agentur</option>
+								<option value="2" <?php if ($zeile['Personen_Abgangsgrund']=="2"){echo "selected";} ?>>Kündigung FDL</option>
+								<option value="3" <?php if ($zeile['Personen_Abgangsgrund']=="3"){echo "selected";} ?>>Alter / Krankheit</option>
+								<option value="4" <?php if ($zeile['Personen_Abgangsgrund']=="4"){echo "selected";} ?>>sonstiges</option>
 								</select> 
 							</div>
 						</div>
+						<div class="12u 12u$(small)">
+							<label for="vertrag">Vertragsverh&auml;ltnis</label>
+							<input id="vertrag" name="vertrag" placeholder="" type="text" value="<?php echo $zeile['Personen_Vertragsverhaeltnis']?>" />
+						</div>
 						<div class="6u 12u$(small)">
 							<label for="ksr_mod_a">KSR-Modul A</label>
-							<input id="ksr_mod_a" name="ksr_mod_a" placeholder="" type="text" value="<?php echo $zeile['Personen_KSR_MOD_A']?>" />
+							<input id="ksr_mod_a" name="ksr_mod_a" placeholder="" type="date" value="<?php echo $zeile['Personen_KSR_MOD_A']?>" />
 						</div>
 						<div class="6u 12u$(small)">
 							<label for="ksr_mod_b">KSR-Modul B</label>
-							<input id="ksr_mod_b" name="ksr_mod_b" placeholder="" type="text" value="<?php echo $zeile['Personen_KSR_MOD_B']?>" />
+							<input id="ksr_mod_b" name="ksr_mod_b" placeholder="" type="date" value="<?php echo $zeile['Personen_KSR_MOD_B']?>" />
 						</div>
 						<div class="6u 12u$(small)">
 							<label for="bmv_id">BMV - ID</label>
@@ -190,11 +191,11 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 						</div>
 						<div class="6u 12u$(small)">
 							<label for="bmv_beginn">BMV - Beginn</label>
-							<input id="bmv_beginn" name="bmv_beginn" placeholder="" type="text" value="<?php echo $zeile['Personen_BMV_Beginn']?>" />
+							<input id="bmv_beginn" name="bmv_beginn" placeholder="" type="date" value="<?php echo $zeile['Personen_BMV_Beginn']?>" />
 						</div>
 						<div class="6u 12u$(small)">
 							<label for="bmv_austritt">BMV - Austritt</label>
-							<input id="bmv_austritt" name="bmv_austritt" placeholder="" type="text" value="<?php echo $zeile['Personen_BMV_Austritt']?>" />
+							<input id="bmv_austritt" name="bmv_austritt" placeholder="" type="date" value="<?php echo $zeile['Personen_BMV_Austritt']?>" />
 						</div>
 					</div>
 				</div>
