@@ -1,60 +1,123 @@
 <?php
 
+if(strlen($_SESSION['GeVo_ID'])>31){
+	$herkunft = substr($_SESSION['GeVo_ID'],30,4);
+	$_SESSION['GeVo_ID']=substr($_SESSION['GeVo_ID'],0,30);
+}
+
 if(isset($_POST['speichern'])){
-	$sql = "UPDATE `GeVo_Vorgang` SET `GeVo_Eingang`='2000-01-01', `GeVo_Beginn`='2000-01-01' WHERE `GeVo_ID`='".$_SESSION['GeVo_ID']."'";
-	if (mysqli_query($db,$sql)) {
-	} else {
-    	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	$sql = "UPDATE `GeVo_Vorgang` SET `GeVo_ASNR`='".$_POST['asnr']."', `GeVo_GS`='".$_POST['gs']."', `GeVo_Vorgangsart`='".$_POST['art']."', `GeVo_Bearbeitungsart`='".$_POST['bart']."', `GeVo_Infofeld`='".$_POST['info']."', `GeVo_Prio`='".$_POST['prio']."', `GeVo_Person_Verantwortlich`='".$_POST['verant']."', `GeVo_Beginn`='".$_POST['beginn']."', `GeVo_Status`='".$_POST['status']."', `GeVo_Wiedervorlage`='".$_POST['wvorlage']."', `GeVo_Wiedervorlageinfo`='".$_POST['grund']."', `GeVo_Referenz_MaTS`='".$_POST['mats']."', `GeVo_Bearbeitungszeit`='".$_POST['zeit']."', `GeVo_Notiz`='".$_POST['notiz']."' WHERE `GeVo_ID`='".$_SESSION['GeVo_ID']."'";
+	do_sql_no_return($db, $sql, "501save");
+	if($_POST['herkunft']=="VERM"){
+		openlink("210");
+	}else{
+		openlink("500");
 	}
-	header("Location: ?page=210");
 }
 if(isset($_POST['back'])){
-	header("Location: ?page=210");
+	if($_POST['herkunft']=="VERM"){
+		openlink("210");
+	}else{
+		openlink("500");
+	}
 }
-		
-			if($_SESSION['GeVo_ID']==""){
-				$_SESSION['GeVo_ID']=getID();
-				$sql = "INSERT INTO `GeVo_Vorgang` (`GeVo_ID`, `GeVo_ASNR`) VALUES ('".$_SESSION['GeVo_ID']."','12345')";
-				if (mysqli_query($db,$sql)) {
-				} else {
-    				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-				}			
-			}
-			
-			$sql = "SELECT t1.* FROM GeVo_Vorgang as t1 WHERE t1.GeVo_ID = '".$_SESSION['GeVo_ID']."'";
-			$db_erg = mysqli_query($db,$sql);
-			if ( ! $db_erg ){
-	  			die('Ungültige Abfrage: ' . mysqli_error($db));
-			}
-			while ($zeile = mysqli_fetch_array( $db_erg)){ 
-?>
+if($_SESSION['GeVo_ID']==""){
+	$_SESSION['GeVo_ID']=getID();
+	if($_GET['her']=='v'){
+		$sql = "INSERT INTO `GeVo_Vorgang` (`GeVo_ID`, `GeVo_Eingang`) VALUES ('".$_SESSION['GeVo_ID']."',".date("Ymd").")";
+	}
+	else{
+		$sql = "INSERT INTO `GeVo_Vorgang` (`GeVo_ID`, `GeVo_Eingang`) VALUES ('".$_SESSION['GeVo_ID']."',".date("Ymd").")";
 
+	}
+	if (mysqli_query($db,$sql)) {
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}			
+}
+
+$sql ="SELECT t3.*, t4.ZAD_Name, t1.Vermittler_ID FROM ZAD as t4 RIGHT JOIN (Vermittler_Konto as t1 RIGHT JOIN (Konten as t2 RIGHT JOIN GeVo_Vorgang as t3 ON t2.Konten_UV = t3.GeVo_ASNR) ON t1.UV = t2.Konten_UV) ON t4.ZAD_ZAD = t2.Konten_ZAD WHERE t3.GeVo_ID = '".$_SESSION['GeVo_ID']."'";
+$db_erg = mysqli_query($db,$sql);
+if ( ! $db_erg ){
+	die('Ungültige Abfrage: ' . mysqli_error($db));
+}
+while ($zeile = mysqli_fetch_array( $db_erg)){ 
+?>
 <section>
 	<h1 id="elements">Gevo-Details</h1>
 	<div class="row 200%">
-		<!-- class="6u 12u$(medium)" bedeutet halbe Seite-->
-		<!-- class="12u 12u$(medium)" bedeutet ganze Seite-->
 		<div class="12u 12u$(medium)">
-			<!-- Form -->
 			<form action="?page=501" method="post"> 
 				<div class="box">
-					<div class="row uniform">
-						
-						<div class="4u 12u$(small)">
-							<label for="eingang">Eingang</label>
-							<input id="eingang" name="eingang" placeholder="02.03.1990" type="date" value="<?php echo $zeile['GeVo_Eingang']?>" />
+					<div class="row uniform">				
+						<div class="6u 12u$(small)">
+							<label for="asnr">ASNR</label>
+							<input id="asnr" name="asnr" placeholder="ASNR" type="text" value="<?php echo $zeile['GeVo_ASNR']?>" />
 						</div>
-						<div class="4u 12u$(small)">
-							<label for="beginn">Beginn</label>
-							<input id="beginn" name="beginn" placeholder="02.03.1990" type="date" value="<?php echo $zeile['GeVo_Beginn']?>" />
+						<div class="6u 12u$(small)">
+							<label for="gs">GS</label>
+							<input id="gs" name="gs" placeholder="GS" type="text" value="<?php echo $zeile['GeVo_GS']?>" />
 						</div>
-						<div class="4u 12u$(small)">
-							<label for="erledigt">erledigt</label>
-							<input id="erledigt" name="erledigt" placeholder="02.03.1990" type="date" value="<?php echo $zeile['GeVo_Erledigt']?>" />
+						<div class="12u$">
+							<label for="vermittler">Vermittler</label>
+							<input id="vermittler" name="vermittler" placeholder="Vermittlername" type="text" value="<?php echo $zeile['ZAD_Name']?>" />
+						</div>
+						<div class="12u$">
+							<label for="art">Vorgangsart</label>
+							<input id="art" name="art" placeholder="Vorgangsart" type="text" value="<?php echo $zeile['GeVo_Vorgangsart']?>" />
+						</div>
+						<div class="12u$">
+							<label for="bart">Bearbeitungsart</label>
+							<input id="bart" name="bart" placeholder="Bearbeitungsart" type="text" value="<?php echo $zeile['GeVo_Bearbeitungsart']?>" />
+						</div>
+						<div class="12u$">
+							<label for="info">Vorgangsinfo</label>
+							<input id="info" name="info" placeholder="Vorgangsinfo" type="text" value="<?php echo $zeile['GeVo_Infofeld']?>" />
+						</div>
+						<div class="12u$">
+							<label for="prio">Priorit&auml;t</label>
+							<input id="prio" name="prio" placeholder="Priorität" type="text" value="<?php echo $zeile['GeVo_Prio']?>" />
+						</div>
+						<div class="12u$">
+							<label for="eingang">Eingang am</label>
+							<input id="eingang" name="eingang" type="date" value="<?php echo $zeile['GeVo_Eingang']?>" />
+						</div>
+						<div class="12u$">
+							<label for="verant">Zust&auml;ndig</label>
+							<input id="verant" name="verant" placeholder="Verantwortlicher" type="text" value="<?php echo $zeile['GeVo_Person_Verantwortlich']?>" />
+						</div>
+						<div class="12u$">
+							<label for="beginn">Begonnen am:</label>
+							<input id="beginn" name="beginn"type="date" value="<?php echo $zeile['GeVo_Beginn']?>" />
+						</div>
+						<div class="12u$">
+							<label for="status">Status</label>
+							<input id="status" name="status" placeholder="Status" type="text" value="<?php echo $zeile['GeVo_Status']?>" />
+						</div>
+						<div class="12u$">
+							<label for="wvorlage">Wiedervorlage</label>
+							<input id="wvorlage" name="wvorlage" type="date" value="<?php echo $zeile['GeVo_Wiedervorlage']?>" />
+						</div>
+						<div class="12u$">
+							<label for="grund">Wiedervorlage-Info</label>
+							<input id="grund" name="grund" placeholder="Grund" type="text" value="<?php echo $zeile['GeVo_Wiedervorlageinfo']?>" />
+						</div>
+						<div class="12u$">
+							<label for="mats">MAtS-Referenz</label>
+							<input id="mats" name="mats" placeholder="MAtS-Referenz" type="text" value="<?php echo $zeile['GeVo_Referenz_MaTS']?>" />
+						</div>
+						<div class="12u$">
+							<label for="zeit">ca. Bearbeitungszeit</label>
+							<input id="zeit" name="zeit" placeholder="Bearbeitungszeit" type="text" value="<?php echo $zeile['GeVo_Bearbeitungszeit']?>" />
+						</div>
+						<div class="12u$">
+							<label for="notiz">Notizen</label>
+							<textarea id="notiz" name="notiz" placeholder="Notizen" rows="6"><?php echo $zeile['GeVo_Notiz']?></textarea>
 						</div>
 					</div>
 				</div>
 				<div class="12u$"><input type="hidden" name="gevo_id" value="<?php echo $zeile['GeVo_ID']?>"></div>
+				<div class="12u$"><input type="hidden" name="herkunft" value="<?php echo $herkunft?>"></div>
 				<div class="12u$">
 					<ul class="actions">
 						<li><input class="special" type="submit" value="Speichern" name="speichern" /></li>
@@ -74,44 +137,50 @@ if(isset($_POST['back'])){
 
 <?php
 
-									$sql = "SELECT t1.* FROM GeVo_Aktion as t1 WHERE t1.Aktion_GeVo_ID = '".$_SESSION['GeVo_ID']."'";
-									$_SESSION['Aktion_ID']="";	
-									$db_erg = mysqli_query($db,$sql);
-											
-									if ( ! $db_erg ){
-	  									die('Ungültige Abfrage: ' . mysqli_error($db));
-									}
-											
-									if (mysqli_num_rows($db_erg)>=1){
-										echo "<section>";										
-										echo "<table border='1'>";
-										echo "<thead>";
-										echo "<th>Feld1</th>";
-										echo "<th>Feld2</th>";
-										echo "<th>Feld3</th>";
-										echo "<th>Feld4</th>";
-										echo "<th></th>";
-										echo "</thead>";
-												
-										while ($zeile = mysqli_fetch_array( $db_erg)){	
-		  									echo "<form action='?page=999' method='post'>";
-		  									echo "<tr>";
-		  									echo "<td>". $zeile['Aktion_ID'] . "</td>";
-		  									echo "<td>". $zeile['Aktion_GeVo_ID'] . "</td>";
-		  									echo "<td>". $zeile['Aktion_ID'] . "</td>";
-		  									echo "<td>". $zeile['Aktion_ID'] . "</td>";
-		  									echo "<td><input type='hidden' name='aktion_id' value='".$zeile['Aktion_ID']."'></td>";
-		  									echo "<td><input type='submit' name='aktion' value='Details' />";
-											echo "</tr>";
-											echo "</form>";
-										}
-										echo "</table>";
-										echo "</section>";
-												
-									}
-								
-									mysqli_free_result( $db_erg );
+$sql = "SELECT t1.* FROM GeVo_Aktion as t1 WHERE t1.Aktion_GeVo_ID = '".$_SESSION['GeVo_ID']."'";
+$_SESSION['Aktion_ID']="";	
+$db_erg = mysqli_query($db,$sql);
+		
+if ( ! $db_erg ){
+	die('Ungültige Abfrage: ' . mysqli_error($db));
+}
+		
+if (mysqli_num_rows($db_erg)>=1){
+	echo "<section>";										
+	echo "<table border='1'>";
+	echo "<thead>";
+	echo "<th>Datum</th>";
+	echo "<th>Aktionstyp</th>";
+	echo "<th>Aktionsinfo</th>";
+	echo "<th>MAtS-Vorgang</th>";
+	echo "<th>Ersteller</th>";
+	echo "<th>Stauts</th>";
+	echo "<th>Erledigt</th>";
+	echo "<th></th>";
+	echo "</thead>";
+			
+	while ($zeile = mysqli_fetch_array( $db_erg)){	
+		echo "<form action='?page=999' method='post'>";
+		echo "<tr>";
+		echo "<td>". $zeile['Aktion_Erstellt'] . "</td>";
+		echo "<td>". $zeile['Aktion_Aktionsart'] . "</td>";
+		echo "<td>". $zeile['Aktion_Infofeld'] . "</td>";
+		echo "<td>". $zeile['Aktion_Referenz_MaTS'] . "</td>";
+		echo "<td>". $zeile['Aktion_Person_Anlage'] . "</td>";
+		echo "<td>". $zeile['Aktion_Status'] . "</td>";
+		echo "<td>". $zeile['Aktion_Erledigt'] . "</td>";
+		echo "<td><input type='hidden' name='aktion_id' value='".$zeile['Aktion_ID']."'></td>";
+		echo "<td><input type='submit' name='aktion' value='Details' />";
+		echo "</tr>";
+		echo "</form>";
+	}
+	echo "</table>";
+	echo "</section>";
+			
+}
+
+mysqli_free_result( $db_erg );
 								
 ?>									
-				<a class="button" href="?page=550">Neue Aktion hinzuf&Uuml;gen</a> 
+	<a class="button" href="?page=550">Neue Aktion hinzuf&Uuml;gen</a> 
 </section>
