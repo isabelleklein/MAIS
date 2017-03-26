@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['speichern'])){
-	$sql = "UPDATE `GeVo_Aktion` SET `Aktion_Erstellt`='".$_POST['erstellt']."', `Aktion_Aktionsart`='".$_POST['art']."' , `Aktion_Infofeld`='".$_POST['info']."' , `Aktion_Referenz_MaT	S`='".$_POST['mats']."' , `Aktion_Notizen`='".$_POST['notiz']."' , `Aktion_Wiedervorlage`='".$_POST['wvorlage']."' , `Aktion_Status`='".$_POST['status']."' WHERE `Aktion_ID`='".$_SESSION['Aktion_ID']."'";
+	$sql = "UPDATE `GeVo_Aktion` SET `Aktion_Erstellt`='".$_POST['erstellt']."', `Aktion_Aktionsart`='".$_POST['art']."' , `Aktion_Infofeld`='".$_POST['info']."' , `Aktion_Referenz_MaTS`='".$_POST['mats']."' , `Aktion_Notizen`='".$_POST['notiz']."' , `Aktion_Wiedervorlage`='".$_POST['wvorlage']."' , `Aktion_Status`='".$_POST['status']."' WHERE `Aktion_ID`='".$_SESSION['Aktion_ID']."'";
 	do_sql_no_return($db, $sql, "550save");
 	openlink("501");
 }

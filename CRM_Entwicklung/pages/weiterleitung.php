@@ -19,6 +19,12 @@ if(isset($_POST['aktion_id'])){
 	header("Location: ?page=550");
 }
 
+//Weiterleitung für GeVo Aktion
+if(isset($_POST['verb_id'])){
+	$_SESSION['Verb_ID'] = $_POST['verb_id'];
+	header("Location: ?page=280");
+}
+
 
 
 ?>
