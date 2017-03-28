@@ -19,10 +19,16 @@ if(isset($_POST['aktion_id'])){
 	header("Location: ?page=550");
 }
 
-//Weiterleitung für GeVo Aktion
+//Weiterleitung für Verbände
 if(isset($_POST['verb_id'])){
 	$_SESSION['Verb_ID'] = $_POST['verb_id'];
 	header("Location: ?page=280");
+}
+
+//Weiterleitung für Vollmachten
+if(isset($_POST['vollm_id'])){
+	$_SESSION['Vollm_ID'] = $_POST['vollm_id'];
+	header("Location: ?page=290");
 }
 
 

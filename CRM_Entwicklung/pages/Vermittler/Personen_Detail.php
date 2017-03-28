@@ -213,7 +213,50 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 </section>
 <?php 
 	} 
-
-
-
 ?>
+<section>
+	<h2>Vollmachten</h2>
+
+<?php
+
+$sql = "SELECT t1.*, t2.Vollm_Bezeichnung FROM `Vollmachten` as t1 LEFT JOIN `Index_Vollmachten` as t2 ON t1.Vollm_Bez_ID = t2.Vollm_Bez_ID WHERE t1.Vollm_Personen_ID = '".$_SESSION['Personen_ID']."'";
+$_SESSION['Vollm_ID']="";	
+$db_erg = mysqli_query($db,$sql);
+		
+if ( ! $db_erg ){
+	die('Ungültige Abfrage: ' . mysqli_error($db));
+}
+		
+if (mysqli_num_rows($db_erg)>=1){
+	echo "<section>";										
+	echo "<table border='1'>";
+	echo "<thead>";
+	echo "<th>Bezeichnung</th>";
+	echo "<th>G&uuml;ltig von</th>";
+	echo "<th>G&uuml;ltig bis</th>";
+	echo "<th>Notiz</th>";
+	echo "<th></th>";
+	echo "</thead>";
+			
+	while ($zeile = mysqli_fetch_array( $db_erg)){	
+		echo "<form action='?page=999' method='post'>";
+		echo "<tr>";
+		echo "<td>". $zeile['Vollm_Bezeichnung'] . "</td>";
+		echo "<td>". $zeile['Vollm_GUV'] . "</td>";
+		echo "<td>". $zeile['Vollm_GUB'] . "</td>";
+		echo "<td>". $zeile['Vollm_Notizen'] . "</td>";
+		echo "<td><input type='hidden' name='vollm_id' value='".$zeile['Vollm_ID']."'></td>";
+		echo "<td><input type='submit' name='vollm' value='Details' />";
+		echo "</tr>";
+		echo "</form>";
+	}
+	echo "</table>";
+	echo "</section>";
+			
+}
+
+mysqli_free_result( $db_erg );
+								
+?>									
+	<a class="button" href="?page=290">Neue Vollmacht hinzuf&Uuml;gen</a> 
+</section>
