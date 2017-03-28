@@ -31,6 +31,12 @@ if(isset($_POST['vollm_id'])){
 	header("Location: ?page=290");
 }
 
+//Weiterleitung für GeVo Details
+if(isset($_POST['kontakt_id'])){
+	$_SESSION['Kontakt_ID'] = $_POST['kontakt_id'];
+	header("Location: ?page=260");
+}
+
 
 
 ?>

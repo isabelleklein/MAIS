@@ -39,8 +39,7 @@
 		}
 		if(isset($_POST['sverant'])){
 			$filter .=" and t3.GeVo_Person_Verantwortlich='".$_POST['sverant']."'";
-		}	
-		echo $filter;	
+		}		
 		$sql ="SELECT t3.*, t4.ZAD_Name, t1.Vermittler_ID FROM ZAD as t4 RIGHT JOIN (Vermittler_Konto as t1 RIGHT JOIN (Konten as t2 RIGHT JOIN GeVo_Vorgang as t3 ON t2.Konten_UV = t3.GeVo_ASNR) ON t1.UV = t2.Konten_UV) ON t4.ZAD_ZAD = t2.Konten_ZAD WHERE t1.Vermittler_ID='".$_SESSION['Vermittler_ID']."'".$filter.";";
 	} else {
 		$sql ="SELECT t3.*, t4.ZAD_Name, t1.Vermittler_ID FROM ZAD as t4 RIGHT JOIN (Vermittler_Konto as t1 RIGHT JOIN (Konten as t2 RIGHT JOIN GeVo_Vorgang as t3 ON t2.Konten_UV = t3.GeVo_ASNR) ON t1.UV = t2.Konten_UV) ON t4.ZAD_ZAD = t2.Konten_ZAD WHERE t1.Vermittler_ID='".$_SESSION['Vermittler_ID']."';";
