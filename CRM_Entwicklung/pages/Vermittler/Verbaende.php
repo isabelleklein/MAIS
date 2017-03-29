@@ -31,12 +31,19 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 					<div class="row uniform">
 						<div class="12u$">
 							<label for="art">Verband:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_Verbaende";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Verb_ID'] == "0" ? "selected":"").">- Verband-</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Verb_ID"]."' ".($zeile['Verb_Verb_ID'] == $row["Verb_ID"] ? "selected":"").">".$row["Verb_Bezeichnung"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
-								<select id="verb" name="verb">
-								<option value="0" <?php if ($zeile['Verb_Verb_ID']=="0"){echo "selected";} ?>>- Verband -</option>
-								<option value="1" <?php if ($zeile['Verb_Verb_ID']=="1"){echo "selected";} ?>>CHARTA</option>
-								<option value="2" <?php if ($zeile['Verb_Verb_ID']=="2"){echo "selected";} ?>>VEMA</option>
-								<option value="3" <?php if ($zeile['Verb_Verb_ID']=="3"){echo "selected";} ?>>vfm</option>
+								<select id="art" name="art">
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>

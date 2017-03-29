@@ -63,12 +63,40 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<input id="vermittler" name="vermittler" placeholder="Vermittlername" type="text" value="<?php echo $zeile['ZAD_Name']?>" />
 						</div>
 						<div class="12u$">
-							<label for="art">Vorgangsart</label>
-							<input id="art" name="art" placeholder="Vorgangsart" type="text" value="<?php echo $zeile['GeVo_Vorgangsart']?>" />
+							<label for="art">Vorgangsart:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_GeVo_Vorgangsart";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Vorgangsart_ID'] == "0" ? "selected":"").">- Vorgangsart-</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Vorgangsart_ID"]."' ".($zeile['GeVo_Vorgangsart'] == $row["Vorgangsart_ID"] ? "selected":"").">".$row["Vorgangsart_Bez"]."</option>n";
+								}								
+							?>
+							<div class="select-wrapper">
+								<select id="art" name="art">
+								<?php
+									echo $options;
+								?>
+								</select> 
+							</div>
 						</div>
 						<div class="12u$">
-							<label for="bart">Bearbeitungsart</label>
-							<input id="bart" name="bart" placeholder="Bearbeitungsart" type="text" value="<?php echo $zeile['GeVo_Bearbeitungsart']?>" />
+							<label for="bart">Bearbeitungsart:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_GeVo_Bearbeitungsart";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Bearbeitungsart_ID'] == "0" ? "selected":"").">- Bearbeitungsart-</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Bearbeitungsart_ID"]."' ".($zeile['GeVo_Bearbeitungsart'] == $row["Bearbeitungsart_ID"] ? "selected":"").">".$row["Bearbeitungsart_Bez"]."</option>n";
+								}								
+							?>
+							<div class="select-wrapper">
+								<select id="bart" name="bart">
+								<?php
+									echo $options;
+								?>
+								</select> 
+							</div>
 						</div>
 						<div class="12u$">
 							<label for="info">Vorgangsinfo</label>

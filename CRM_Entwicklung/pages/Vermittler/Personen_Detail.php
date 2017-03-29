@@ -40,13 +40,20 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 				<div class="box">
 					<div class="row uniform">
 						<div class="2u 15u$(small)">
-							<label for="anr">Anrede</label>
+							<label for="anr">Anrede:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_Anrede";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Anrede_ID'] == "0" ? "selected":"").">- Anrede -</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Anrede_ID"]."' ".($zeile['Personen_Anrede'] == $row["Anrede_ID"] ? "selected":"").">".$row["Anrede_Bez"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
 								<select id="anr" name="anr">
-								<option value="0" <?php if ($zeile['Personen_Anrede']=="0"){echo "selected";} ?>>- Anrede -</option>
-								<option value="1" <?php if ($zeile['Personen_Anrede']=="1"){echo "selected";} ?>>Herr</option>
-								<option value="2" <?php if ($zeile['Personen_Anrede']=="2"){echo "selected";} ?>>Frau</option>
-								<option value="3" <?php if ($zeile['Personen_Anrede']=="3"){echo "selected";} ?>>Firma</option>
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>
@@ -67,13 +74,20 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<input id="mail" name="mail" placeholder="E-Mail" type="email" value="<?php echo $zeile['Personen_EMAIL']?>" />
 						</div>
 						<div class="4u 15u$(small)">
-							<label for="titel">Titel</label>
+							<label for="titel">Titel:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_Personen_Titel";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Titel_ID'] == "0" ? "selected":"").">- Titel -</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Titel_ID"]."' ".($zeile['Personen_Titel'] == $row["Titel_ID"] ? "selected":"").">".$row["Titel_Bez"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
 								<select id="titel" name="titel">
-								<option value="0" <?php if ($zeile['Personen_Titel']=="0"){echo "selected";} ?>>- Titel -</option>
-								<option value="1" <?php if ($zeile['Personen_Titel']=="1"){echo "selected";} ?>>Testtitel1</option>
-								<option value="2" <?php if ($zeile['Personen_Titel']=="2"){echo "selected";} ?>>Testtitel2</option>
-								<option value="3" <?php if ($zeile['Personen_Titel']=="3"){echo "selected";} ?>>Testtitel3</option>
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>
@@ -95,14 +109,20 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 				<div class="box">
 					<div class="row uniform">
 						<div class="2u 15u$(small)">
-							<label for="dsig">DISG</label>
+							<label for="disg">DISG - Modell:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_DSIG";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['DSIG_ID'] == "0" ? "selected":"").">- DISG -</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["DSIG_ID"]."' ".($zeile['Personen_DSIG'] == $row["DSIG_ID"] ? "selected":"").">".$row["DSIG_Bez"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
-								<select id="dsig" name="dsig">
-								<option value="0" <?php if ($zeile['Personen_DSIG']=="0"){echo "selected";} ?>>- DISG -</option>
-								<option value="g" <?php if ($zeile['Personen_DSIG']=="g"){echo "selected";} ?>>grün</option>
-								<option value="r" <?php if ($zeile['Personen_DSIG']=="r"){echo "selected";} ?>>rot</option>
-								<option value="y" <?php if ($zeile['Personen_DSIG']=="y"){echo "selected";} ?>>gelb</option>
-								<option value="b" <?php if ($zeile['Personen_DSIG']=="b"){echo "selected";} ?>>blau</option>
+								<select id="disg" name="disg">
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>
@@ -158,14 +178,20 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<input id="ende" name="ende" placeholder="" type="date" value="<?php echo $zeile['Personen_Vertragsende']?>" />
 						</div>
 						<div class="4u 12u$(small)">
-							<label for="agrund">Abgangsgrund</label>
+							<label for="agrund">Abgangsgrund:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_Abgangsgrund";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Abgangsgrund_ID'] == "0" ? "selected":"").">- Abgangsgrund -</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Abgangsgrund_ID"]."' ".($zeile['Personen_Abgangsgrund'] == $row["Abgangsgrund_ID"] ? "selected":"").">".$row["Abgangsgrund_Bez"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
 								<select id="agrund" name="agrund">
-								<option value="0" <?php if ($zeile['Personen_Abgangsgrund']=="0"){echo "selected";} ?>>- Abgangsgrund -</option>
-								<option value="1" <?php if ($zeile['Personen_Abgangsgrund']=="1"){echo "selected";} ?>>Kündigung Agentur</option>
-								<option value="2" <?php if ($zeile['Personen_Abgangsgrund']=="2"){echo "selected";} ?>>Kündigung FDL</option>
-								<option value="3" <?php if ($zeile['Personen_Abgangsgrund']=="3"){echo "selected";} ?>>Alter / Krankheit</option>
-								<option value="4" <?php if ($zeile['Personen_Abgangsgrund']=="4"){echo "selected";} ?>>sonstiges</option>
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>

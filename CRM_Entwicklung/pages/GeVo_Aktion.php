@@ -35,12 +35,19 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 						</div>
 						<div class="12u$">
 							<label for="art">Aktionsart:</label>
+							<?php
+								$sql_option = "SELECT * FROM Index_Aktion_Aktionsart";
+								$result = mysqli_query($db,$sql_option);
+								$options = "<option value='0'".($zeile['Aktionsart_ID'] == "0" ? "selected":"").">- Aktionsart-</option>";
+								while ($row = mysqli_fetch_array($result)){
+									$options .= "<option value ='".$row["Aktionsart_ID"]."' ".($zeile['Aktion_Aktionsart'] == $row["Aktionsart_ID"] ? "selected":"").">".$row["Aktionsart_Bez"]."</option>n";
+								}								
+							?>
 							<div class="select-wrapper">
 								<select id="art" name="art">
-								<option value="0" <?php if ($zeile['Aktion_Aktionsart']=="0"){echo "selected";} ?>>- Aktionsart -</option>
-								<option value="1" <?php if ($zeile['Aktion_Aktionsart']=="1"){echo "selected";} ?>>Art 1</option>
-								<option value="2" <?php if ($zeile['Aktion_Aktionsart']=="2"){echo "selected";} ?>>Art 2</option>
-								<option value="3" <?php if ($zeile['Aktion_Aktionsart']=="3"){echo "selected";} ?>>Art 3</option>
+								<?php
+									echo $options;
+								?>
 								</select> 
 							</div>
 						</div>
