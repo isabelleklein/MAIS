@@ -23,7 +23,9 @@
 										</article>
 										<article>
 											<h3>Produktion der OE</h3>
-											<p>Abbildung der Produktion je KVB1 als Säule</p>
+											<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+											
+											
 											<ul class="actions">
 												<li><a href="#" class="button">More</a></li>
 											</ul>

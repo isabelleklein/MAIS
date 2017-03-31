@@ -44,7 +44,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_Anrede";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Anrede_ID'] == "0" ? "selected":"").">- Anrede -</option>";
+								$options = "<option value='0'".($zeile['Personen_Anrede'] == "0" ? "selected":"").">- Anrede -</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Anrede_ID"]."' ".($zeile['Personen_Anrede'] == $row["Anrede_ID"] ? "selected":"").">".$row["Anrede_Bez"]."</option>n";
 								}								
@@ -78,7 +78,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_Personen_Titel";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Titel_ID'] == "0" ? "selected":"").">- Titel -</option>";
+								$options = "<option value='0'".($zeile['Personen_Titel'] == "0" ? "selected":"").">- Titel -</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Titel_ID"]."' ".($zeile['Personen_Titel'] == $row["Titel_ID"] ? "selected":"").">".$row["Titel_Bez"]."</option>n";
 								}								
@@ -113,7 +113,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_DSIG";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['DSIG_ID'] == "0" ? "selected":"").">- DISG -</option>";
+								$options = "<option value='0'".($zeile['Personen_DSIG'] == "0" ? "selected":"").">- DISG -</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["DSIG_ID"]."' ".($zeile['Personen_DSIG'] == $row["DSIG_ID"] ? "selected":"").">".$row["DSIG_Bez"]."</option>n";
 								}								
@@ -182,7 +182,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_Abgangsgrund";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Abgangsgrund_ID'] == "0" ? "selected":"").">- Abgangsgrund -</option>";
+								$options = "<option value='0'".($zeile['Personen_Abgangsgrund'] == "0" ? "selected":"").">- Abgangsgrund -</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Abgangsgrund_ID"]."' ".($zeile['Personen_Abgangsgrund'] == $row["Abgangsgrund_ID"] ? "selected":"").">".$row["Abgangsgrund_Bez"]."</option>n";
 								}								

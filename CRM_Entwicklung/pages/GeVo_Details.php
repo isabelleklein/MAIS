@@ -67,7 +67,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_GeVo_Vorgangsart";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Vorgangsart_ID'] == "0" ? "selected":"").">- Vorgangsart-</option>";
+								$options = "<option value='0'".($zeile['GeVo_Vorgangsart'] == "0" ? "selected":"").">- Vorgangsart-</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Vorgangsart_ID"]."' ".($zeile['GeVo_Vorgangsart'] == $row["Vorgangsart_ID"] ? "selected":"").">".$row["Vorgangsart_Bez"]."</option>n";
 								}								
@@ -85,7 +85,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_GeVo_Bearbeitungsart";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Bearbeitungsart_ID'] == "0" ? "selected":"").">- Bearbeitungsart-</option>";
+								$options = "<option value='0'".($zeile['GeVo_Bearbeitungsart'] == "0" ? "selected":"").">- Bearbeitungsart-</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Bearbeitungsart_ID"]."' ".($zeile['GeVo_Bearbeitungsart'] == $row["Bearbeitungsart_ID"] ? "selected":"").">".$row["Bearbeitungsart_Bez"]."</option>n";
 								}								

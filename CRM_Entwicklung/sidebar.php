@@ -67,6 +67,7 @@
 										<li><a href="?page=300">Statistiken</a></li>
 										<li><a href="?page=400">Kampagne</a></li>
 										<li><a href="?page=500">GeVo's</a></li>
+										<li><a href="?page=600">Aufgaben</a></li>
 									</ul>
 								</nav>
 							</section>

@@ -38,7 +38,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 							<?php
 								$sql_option = "SELECT * FROM Index_Aktion_Aktionsart";
 								$result = mysqli_query($db,$sql_option);
-								$options = "<option value='0'".($zeile['Aktionsart_ID'] == "0" ? "selected":"").">- Aktionsart-</option>";
+								$options = "<option value='0'".($zeile['Aktion_Aktionsart'] == "0" ? "selected":"").">- Aktionsart-</option>";
 								while ($row = mysqli_fetch_array($result)){
 									$options .= "<option value ='".$row["Aktionsart_ID"]."' ".($zeile['Aktion_Aktionsart'] == $row["Aktionsart_ID"] ? "selected":"").">".$row["Aktionsart_Bez"]."</option>n";
 								}								

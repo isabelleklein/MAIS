@@ -1,10 +1,10 @@
 <section>
 	<header class="main">
-		<h2>Vermittler-Aufgaben</h2>
+		<h2>Aufgaben</h2>
 	</header>
 </section>
 
-<form action="Aufgaben.php?page=210" method="post">
+<form action="?page=600" method="post">
 	<div class="box">
 		<div class="row uniform">
 			<div class="12u$">
@@ -20,17 +20,17 @@
 	</div>
 </form>
 
+
 <?php 
 	if(isset($_POST['suchen'])){
 		$filter = "";
 		if(isset($_POST['besch'])){
 			$filter .= " and t1.Aufgaben_Beschreibung='".$_POST['besch']."'";
 		}	
-		$sql ="SELECT t1.* FROM Aufgaben as t1 WHERE t1.Aufgaben_Vermittler_ID='".$_SESSION['Vermittler_ID']."'".$filter.";";
+		$sql ="SELECT t1.* FROM Aufgaben as t1 WHERE '".$filter.";";
 	} else {
-		$sql ="SELECT t1.* FROM Aufgaben as t1 WHERE t1.Aufgaben_Vermittler_ID='".$_SESSION['Vermittler_ID']."';";
+		$sql ="SELECT t1.* FROM Aufgaben as t1;";
 	}
-
 	$_SESSION['Aufgaben_ID']="";	
 	$db_erg = mysqli_query($db,$sql);
 			
@@ -68,5 +68,5 @@
 	}
 	mysqli_free_result( $db_erg );	
 ?>
-	<a class="button" href="?page=601&amp;her=v">Neue Aufgabe hinzuf&Uuml;gen</a> 
+	<a class="button" href="?page=601&amp;her=n">Neue Aufgabe hinzuf&Uuml;gen</a> 
 	

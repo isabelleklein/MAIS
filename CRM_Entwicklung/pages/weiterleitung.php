@@ -37,6 +37,13 @@ if(isset($_POST['kontakt_id'])){
 	header("Location: ?page=260");
 }
 
+//Weiterleitung für Augaben Details
+if(isset($_POST['aufgaben_id'])){
+	$_SESSION['Aufgaben_ID'] = $_POST['aufgaben_id'];
+	header("Location: ?page=601");
+}
+
+
 
 
 ?>

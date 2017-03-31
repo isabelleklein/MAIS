@@ -29,7 +29,7 @@
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
-	$pagelist = array(001,002,003,100,101,200,201,202,203,204,205,206,207,208,209,210,250,260,280,290,300,400,500,501,550,999);
+	$pagelist = array(001,002,003,100,101,200,201,202,203,204,205,206,207,208,209,210,250,260,280,290,300,400,500,501,550,600,601,999);
 	/*if($page != $pagelist) header("Location: ?page=999");*/
 	if (!in_array($page, $pagelist)) {
     	include('pages/error_page.php');
@@ -61,6 +61,9 @@
 	if($page == 500) include('pages/GeVo.php');
 	if($page == 501) include('pages/GeVo_Details.php');
 	if($page == 550) include('pages/GeVo_Aktion.php');
+	if($page == 600) include('pages/Aufgaben.php');
+	if($page == 601) include('pages/Aufgaben_Details.php');
+
 
 
 	
