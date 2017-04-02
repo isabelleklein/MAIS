@@ -39,7 +39,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 			<form action="?page=250" method="post"> 
 				<div class="box">
 					<div class="row uniform">
-						<div class="2u 15u$(small)">
+						<div class="2u 12u$(small)">
 							<label for="anr">Anrede:</label>
 							<?php
 								$sql_option = "SELECT * FROM Index_Anrede";

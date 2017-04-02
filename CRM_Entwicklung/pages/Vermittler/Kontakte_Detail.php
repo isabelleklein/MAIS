@@ -26,7 +26,7 @@ while ($zeile = mysqli_fetch_array( $db_erg)){
 	<h1 id="elements">Kontaktdetails</h1>
 	<div class="row 200%">
 		<div class="12u 12u$(medium)">
-			<form action="?page=260" method="post"> 
+			<form action="Kontakte_Detail.php?page=260" method="post"> 
 				<div class="box">
 					<div class="row uniform">
 						<div class="12u$(small)">

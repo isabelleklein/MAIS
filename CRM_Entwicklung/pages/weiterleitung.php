@@ -43,6 +43,12 @@ if(isset($_POST['aufgaben_id'])){
 	header("Location: ?page=601");
 }
 
+//Weiterleitung für Konto Details
+if(isset($_POST['konten_id'])){
+	$_SESSION['Konto_ID'] = $_POST['konten_id'];
+	header("Location: ?page=220");
+}
+
 
 
 

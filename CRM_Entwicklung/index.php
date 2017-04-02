@@ -29,7 +29,7 @@
 	
 /*----------------------------*/
 /*Errorpage aufrufen*/	
-	$pagelist = array(001,002,003,100,101,200,201,202,203,204,205,206,207,208,209,210,250,260,280,290,300,400,500,501,550,600,601,999);
+	$pagelist = array(001,002,003,100,101,200,201,202,203,204,205,206,207,208,209,210,220,250,260,280,290,300,400,500,501,550,600,601,999);
 	/*if($page != $pagelist) header("Location: ?page=999");*/
 	if (!in_array($page, $pagelist)) {
     	include('pages/error_page.php');
@@ -52,6 +52,7 @@
 	if($page == 208) include('pages/Vermittler/Termine.php');
 	if($page == 209) include('pages/Vermittler/Vereinbarungen.php');
 	if($page == 210) include('pages/Vermittler/GeVo.php');
+	if($page == 220) include('pages/Vermittler/Konten_Detail.php');
 	if($page == 250) include('pages/Vermittler/Personen_Detail.php');
 	if($page == 260) include('pages/Vermittler/Kontakte_Detail.php');
 	if($page == 280) include('pages/Vermittler/Verbaende.php');
