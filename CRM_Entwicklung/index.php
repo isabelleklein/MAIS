@@ -3,26 +3,19 @@
 	/* $user_id = $_SESSION['user_id']; */
 	$_SESSION['user_id'] = "HEDDERSO";
 	$page = $_GET['page'];
-	
 	if (!isset($_SESSION['Vermittler_ID'])){$_SESSION['Vermittler_ID']="";}
 	if(isset($_GET['ID']) and $_GET['ID'] != $_SESSION['Vermittler_ID']) {
 		$_SESSION['Vermittler_ID'] = $_GET['ID'];		
-		
-	}	
-	
+	}
+	if($page == null) header("Location: ?page=100");	
 	include('pages/weiterleitung.php');
-
-		
-	
-	if($page == null) header("Location: ?page=100");
 	
 	//PHP-Seiten die eine Header-FKT einhalten bitte hier includen
-	
 	include('dbconnect.php');
+	
 	include('function_collection.php');
+	
 	//if($page == 999) header("Location: pages/weiterleitung.php");
-	
-	
 	include('header.php');
 
 
@@ -71,8 +64,7 @@
 	
 	
 	?>
-
-						</div>
+							</div>
 					</div>
 <?php
 	
